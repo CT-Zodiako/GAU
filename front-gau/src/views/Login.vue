@@ -17,7 +17,7 @@
               <input type="password" name="password" id="pwd" placeholder="Contraseña">
           </div>
           <button class="btn mt-3">Conectar</button>
-      </form>       
+      </form>
   </div>
 </template>
 
