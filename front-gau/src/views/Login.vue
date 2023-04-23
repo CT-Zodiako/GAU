@@ -1,6 +1,6 @@
 <template>
   <div class="logo">
-          <img src="@/assets/logoGAU.png" alt="">
+          <img src="@/assets/logo.png" alt="">
   </div>
 <div class="wrapper">
       
