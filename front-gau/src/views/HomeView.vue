@@ -16,7 +16,7 @@
                 </a>
             </div>
             <div class="salir">
-              <p>Salir</p>
+             <a href=""><p>Salir</p></a>
             </div>
           </div>
         </div>
@@ -24,9 +24,39 @@
     </div>
 
     <div class="body">
-      <div>
+      <div class="list-view-materia">
         <div class="new-materia">
-          <button type="button" class="btn btn-warning">Nueva materia</button>
+          <button type="button" class="btn btn-warning" @click="showModal = true">Nueva materia</button>
+          <!-- MODAL DE ESTUDIANTES -->
+          <div class="modal" tabindex="-1" v-if="showModal">
+            <div class="modal-dialog">
+              <div class="modal-content" style="background: #efc729;">
+                <!-- HEADER DEL MODAL -->
+                <div class="modal-header">
+                  <h5 class="modal-title" style="font-size: 28px;">Datos de la Materia</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="showModal = false"></button>
+                </div>
+                <!-- BODY DEL MODAL -->
+                <div class="modal-body">
+                  <form>
+                    <div class="mb-3 n">
+                      <label for="exampleInputEmail1" class="form-label">Id</label>
+          <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="id">
+                    </div>
+                    <div class="mb-3 n">
+                      <label for="exampleInputPassword1" class="form-label">Materia</label>
+          <input type="Nombre" class="form-control" id="exampleInputPassword1" placeholder="materia">
+                    </div>
+                  </form>
+                </div>
+                <!-- FOOTER DEL MODAL -->
+                <div class="modal-footer">
+                  <button type="button" class="btn" data-bs-dismiss="modal" @click="showModal = false">Close</button>
+                  <button type="submit" class="btn">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="container" style="background-color: white; border-radius: 1vh; margin-top: 30px">
@@ -153,6 +183,7 @@
 
 <style>
 .header{
+  margin: 0 auto;
   height: 80px;
   display: flex;
   justify-content: space-around;
@@ -178,8 +209,9 @@
   align-items: center;
 }
 
-.salir{
+.salir a{
   /* background: red; */
+  text-decoration: none;
   height: 17px;
   display: flex;
   align-content: center;
@@ -191,22 +223,35 @@
   background: #2c477c;
   height: 700px;
   width: 100%;
-  /* padding: 30px; */
+  padding-top: 50px;
   display: grid;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.new-materia{
+  display: flex;
+  justify-content: left;
   align-items: center;
+  height: 50px;
 }
 
 .new-materia .btn{
-  height: 35px;
-  width: 110px;
+  margin: 10px;
+  padding: 0;
+  height: 42px;
+  width: 100px;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
+  text-align: center;
   border-radius: 3vh;
 }
 
 .table{
+  background: white;
   width: 600px;
+  border-radius: 0.3vh;
+  margin-top: 30px
 }
 
 .date{
@@ -219,16 +264,75 @@
   align-content: center;
 }
 
-.opciones{
+tr .opciones{
+  padding-bottom: 15px;
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 
+/* INICIA LOS ESTILOS PARA EL MODAL  */
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.modal-dialog{
+  width: 500px;
+}
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+}
+button {
+  margin-top: 10px;
+}
+
+.modal-body .mb-3{
+  text-align: left;
+}
+
+.modal-footer .btn {
+  box-shadow: none;
+  width: 100%;
+  height: 40px;
+  background-color: #2c477c;
+  color: #efc729;
+  border-radius: 25px;
+  letter-spacing: 1.3px;
+}
+.modal .n input {
+  width: 100%;
+  height: 55px;
+  display: block;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 15px;
+  color: #666;
+  padding-left: 10px;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  box-shadow: inset 8px 8px 8px #2c477c, inset -8px -8px 8px #2c477c;
+}
 </style>
 
 <script>
   export default {
-  name: 'LoginView'
+  name: 'LoginView',
+  data() {
+    return {
+      showModal: false,
+    };
+  },
 }
 </script>
