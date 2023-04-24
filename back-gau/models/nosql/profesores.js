@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongooseDelete = require('mongoose-delete')
 
 const profesorSchema = new mongoose.Schema({
   idProfesor: {
@@ -21,6 +22,9 @@ const profesorSchema = new mongoose.Schema({
   }
 });
 
+
+
+profesorSchema.plugin(mongooseDelete, {overrideMethods: 'all'})
 const Profesor = mongoose.model('Profesor', profesorSchema);
 
 module.exports = Profesor;

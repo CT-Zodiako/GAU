@@ -1,6 +1,12 @@
+const mongooseDelete = require('mongoose-delete')
 const mongoose = require('mongoose');
 
 const estudianteSchema = new mongoose.Schema({
+  idEstudiante: {
+    type: String,
+    required: true,
+    unique: true
+  },
   nombreCompleto: {
     type: String,
     required: true
@@ -12,7 +18,6 @@ const estudianteSchema = new mongoose.Schema({
   },
   huellaDigital: {
     type: String,
-    required: true
   },
   asistencias: [
     {
@@ -21,7 +26,7 @@ const estudianteSchema = new mongoose.Schema({
     }
   ]
 });
-
+estudianteSchema.plugin(mongooseDelete, {overrideMethods: 'all'})
 const Estudiante = mongoose.model('Estudiante', estudianteSchema);
 
 module.exports = Estudiante;

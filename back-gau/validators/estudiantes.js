@@ -1,8 +1,8 @@
 const {check} = require("express-validator")
 const validacionResultados = require('../utils/handleValidator')
 
-const validacioncrearProfesor = [
-    check("idProfesor")
+const validacionCrearEstudiante = [
+    check("idEstudiante")
     .exists()
     .notEmpty(),
     check("nombreCompleto")
@@ -11,15 +11,12 @@ const validacioncrearProfesor = [
     check("numeroIdentificacion")
     .exists()
     .notEmpty(),
-    check("password")
-    .exists()
-    .notEmpty(),
     (req,res,next)=>{
         return validacionResultados(req,res,next)
     }
 ]
 
-const validacionTraerProfesor = [
+const validacionTraerEstudiante = [
     check("id")
     .exists()
     .notEmpty()
@@ -29,4 +26,4 @@ const validacionTraerProfesor = [
     }
 ]
 
-module.exports = {validacioncrearProfesor, validacionTraerProfesor}
+module.exports = {validacionCrearEstudiante, validacionTraerEstudiante}

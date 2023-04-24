@@ -1,6 +1,12 @@
+const mongooseDelete = require('mongoose-delete')
 const mongoose = require('mongoose');
 
 const claseSchema = new mongoose.Schema({
+  idClase: {
+    type: String,
+    required: true,
+    unique: true
+  },
   nombreClase: {
     type: String,
     required: true
@@ -12,10 +18,10 @@ const claseSchema = new mongoose.Schema({
   },
   fecha: {
     type: Date,
-    required: true
   }
 });
 
+claseSchema.plugin(mongooseDelete, {overrideMethods: 'all'})
 const Clase = mongoose.model('Clase', claseSchema);
 
 module.exports = Clase;
