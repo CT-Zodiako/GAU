@@ -2,11 +2,6 @@ const mongooseDelete = require('mongoose-delete')
 const mongoose = require('mongoose');
 
 const asistenciaSchema = new mongoose.Schema({
-  idAsistencia: {
-    type: String,
-    required: true,
-    unique: true
-  },
   idEstudiante: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Estudiante',
@@ -17,15 +12,18 @@ const asistenciaSchema = new mongoose.Schema({
     ref: 'Clase',
     required: true
   },
-  fecha: {
-    type: Date,
-  },
-  horaEntrada: {
-    type: Date,
-  },
-});
+  faltas: {
+    type: Number,
+    default: "0"
+  }
+},
+  {
+    timestamps: true,
+    versionKey:false
+  }
+);
 
-asistenciaSchema.plugin(mongooseDelete, {overrideMethods: 'all'})
+asistenciaSchema.plugin(mongooseDelete, { overrideMethods: 'all' })
 const Asistencia = mongoose.model('Asistencia', asistenciaSchema);
 
 module.exports = Asistencia;

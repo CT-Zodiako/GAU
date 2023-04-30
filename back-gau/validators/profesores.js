@@ -1,32 +1,29 @@
-const {check} = require("express-validator")
+const { check } = require("express-validator")
 const validacionResultados = require('../utils/handleValidator')
 
 const validacioncrearProfesor = [
-    check("idProfesor")
-    .exists()
-    .notEmpty(),
     check("nombreCompleto")
-    .exists()
-    .notEmpty(),
+        .exists()
+        .notEmpty(),
     check("numeroIdentificacion")
-    .exists()
-    .notEmpty(),
+        .exists()
+        .notEmpty(),
     check("password")
-    .exists()
-    .notEmpty(),
-    (req,res,next)=>{
-        return validacionResultados(req,res,next)
+        .exists()
+        .notEmpty(),
+    (req, res, next) => {
+        return validacionResultados(req, res, next)
     }
 ]
 
 const validacionTraerProfesor = [
     check("id")
-    .exists()
-    .notEmpty()
-    .isMongoId(),
-    (req,res,next)=>{
-        return validacionResultados(req,res,next)
+        .exists()
+        .notEmpty()
+        .isMongoId(),
+    (req, res, next) => {
+        return validacionResultados(req, res, next)
     }
 ]
 
-module.exports = {validacioncrearProfesor, validacionTraerProfesor}
+module.exports = { validacioncrearProfesor, validacionTraerProfesor }

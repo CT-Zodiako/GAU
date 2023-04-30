@@ -15,7 +15,7 @@ const traerAsistencias = async (req, res) => {
 const traerAsistencia = async (req, res) => {
     try {
         req = matchedData(req)
-        const {id} = req
+        const { id } = req
         const data = await asistenciaModel.findById(id)
         res.send({ data })
     } catch (error) {
@@ -35,8 +35,9 @@ const crearAsistencia = async (req, res) => {
 
 const actualizarAsistencia = async (req, res) => {
     try {
-        const {id, ...body} = matchedData(req)
-        const data = await asistenciaModel.findOneAndUpdate(id,body)
+        const { id, ...body } = matchedData(req)
+        const data = await asistenciaModel.findOneAndUpdate(id, body)
+        console.log(data)
         res.send({ data })
     } catch (error) {
         handleHttpError(res, 'Error en actualizarEstudiante')
@@ -47,8 +48,8 @@ const actualizarAsistencia = async (req, res) => {
 const eliminarAsistencia = async (req, res) => {
     try {
         req = matchedData(req)
-        const {id} = req
-        const data = await asistenciaModel.delete({_id:id})
+        const { id } = req
+        const data = await asistenciaModel.delete({ _id: id })
         res.send({ data })
     } catch (error) {
         handleHttpError(res, 'Error en eliminarEstudiante')
