@@ -13,12 +13,13 @@ const profesorSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true
+    required: true,
+    select: false
   }
 },
   {
     timestamps: true,
-    versionKey:false
+    versionKey: false
   }
 );
 
