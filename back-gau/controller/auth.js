@@ -38,7 +38,7 @@ const loginCtrl = async (req, res) => {
         }
         profesor.set('password', undefined, { strict: false })
         const data = {
-            token: firmarToken(profesor),
+            token: await firmarToken(profesor),
             profesor
         }
 
