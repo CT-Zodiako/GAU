@@ -13,6 +13,8 @@ const autentificacionMiddleware = async (req, res, next) => {
         if (!dataToken._id) {
             handleHttpError(res, 'error id token', 401)
         }
+        const profesor = await profesoresModel.findById(dataToken._id)
+        req.profesor = profesor
         next()
     } catch (error) {
         console.log(error)
