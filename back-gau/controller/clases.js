@@ -5,8 +5,9 @@ const { handleHttpError } = require('../utils/handleError')
 
 const traerClases = async (req, res) => {
     try {
+        const profesor = req.profesor
         const data = await clasesModel.find({})
-        res.send({ data })
+        res.send({ data, profesor })
     } catch (error) {
         handleHttpError(res, 'Error en traerEstudiantes')
     }
@@ -15,7 +16,7 @@ const traerClases = async (req, res) => {
 const traerClase = async (req, res) => {
     try {
         req = matchedData(req)
-        const {id} = req
+        const { id } = req
         const data = await clasesModel.findById(id)
         res.send({ data })
     } catch (error) {
@@ -35,8 +36,8 @@ const crearClase = async (req, res) => {
 
 const actualizarClase = async (req, res) => {
     try {
-        const {id, ...body} = matchedData(req)
-        const data = await clasesModel.findOneAndUpdate(id,body)
+        const { id, ...body } = matchedData(req)
+        const data = await clasesModel.findOneAndUpdate(id, body)
         res.send({ data })
     } catch (error) {
         handleHttpError(res, 'Error en actualizarEstudiante')
@@ -47,8 +48,8 @@ const actualizarClase = async (req, res) => {
 const eliminarClase = async (req, res) => {
     try {
         req = matchedData(req)
-        const {id} = req
-        const data = await clasesModel.delete({_id:id})
+        const { id } = req
+        const data = await clasesModel.delete({ _id: id })
         res.send({ data })
     } catch (error) {
         handleHttpError(res, 'Error en eliminarEstudiante')

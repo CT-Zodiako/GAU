@@ -21,9 +21,9 @@ const firmarToken = async (profesor) => {
 
 const verificarToken = async (tokenJwt) => {
     try {
-        return jsonwebtoken.verify(tokenJwt, JTW_SECRET)
+        return jsonwebtoken.verify(tokenJwt, JWT_SECRET)
     } catch (error) {
-        return null
+        console.log('error verificarToken')
     }
 }
 
