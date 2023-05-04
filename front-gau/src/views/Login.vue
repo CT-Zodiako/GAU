@@ -10,27 +10,36 @@
       <form class="p-3 mt-3">
           <div class="form-field d-flex align-items-center">
               <span class="far fa-user"></span>
-              <input type="text" name="userName" id="userName" placeholder="Usuario">
+              <input type="text" v-model="nombreCompleto" name="userName" id="userName" placeholder="Usuario">
           </div>
           <div class="form-field d-flex align-items-center">
               <span class="fas fa-key"></span>
-              <input type="password" name="password" id="pwd" placeholder="Contraseña">
+              <input type="password" v-model="password" name="password" id="pwd" placeholder="Contraseña">
           </div>
           <button class="btn mt-3">Conectar</button>
-      </form>
+          <!-- @click="$router.push('/listEst') para redireccionar a la otra pagina -->
+      </form>       
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
-  name: 'HomeView'
+  name: 'HomeView',
+  data(){
+    return{
+      nombreCompleto: '',
+      password: '',
+    }
+  }
+  
 }
 </script>
 
 <style scope>
 /* Importing fonts from Google */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
-
 /* Reseting */
 * {
   margin: 0;
