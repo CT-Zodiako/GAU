@@ -1,15 +1,14 @@
 const express = require('express')
-const {validacionTraerClase,validacionCrearClase} = require('../validators/clases')
-const {traerClases,traerClase, actualizarClase, crearClase, eliminarClase} = require('../controller/clases')
+const { validacionTraerClase, validacionCrearClase } = require('../validators/clases')
+const { traerClases, traerClase, actualizarClase, crearClase, eliminarClase } = require('../controller/clases')
+const autentificacionMiddleware = require('../middleware/sesion')
 const router = express.Router()
 
-//TODO http://localhost/profesores  GET,POST,DELETE,PUT
+router.get("/", autentificacionMiddleware, traerClases)
 
-router.get("/",traerClases)
+router.get("/:id", validacionTraerClase, traerClase)
 
-router.get("/:id",validacionTraerClase, traerClase)
-
-router.put("/:id",validacionTraerClase,validacionCrearClase,actualizarClase)
+router.put("/:id", validacionTraerClase, validacionCrearClase, actualizarClase)
 
 router.post("/", validacionCrearClase, crearClase)
 

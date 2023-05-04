@@ -3,7 +3,6 @@ const {validacionCrearAsistencia,validacionTraerAsistencia} = require('../valida
 const {traerAsistencias,traerAsistencia, actualizarAsistencia, crearAsistencia, eliminarAsistencia} = require('../controller/asistencia')
 const router = express.Router()
 
-//TODO http://localhost/profesores  GET,POST,DELETE,PUT
 
 router.get("/",traerAsistencias)
 
