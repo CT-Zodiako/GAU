@@ -1,0 +1,3 @@
+jPORT = 3001
+DB_URI = mongodb+srv://zodiakoop:1234567.@cluster0.llmtjpc.mongodb.net/dbgau?retryWrites=true&w=majority
+JWT_SECRET=LlaveMaestra
