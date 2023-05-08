@@ -17,7 +17,7 @@
               <input type="password" v-model="password" name="password" id="pwd" placeholder="Contraseña">
           </div>
           <button class="btn mt-3">Conectar</button>
-          <!-- @click="$router.push('/listEst') para redireccionar a la otra pagina -->
+          <!-- @click="$router.push('/listEst')" para redireccionar a la otra pagina -->
       </form>       
   </div>
 </template>
