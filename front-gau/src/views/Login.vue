@@ -7,7 +7,7 @@
       <div class="gau text-center mt-4 name">
           GAU
       </div>
-      <form class="p-3 mt-3">
+      <form class="p-3 mt-3" @submit.prevent="login">
           <div class="form-field d-flex align-items-center">
               <span class="far fa-user"></span>
               <input type="text" v-model="nombreCompleto" name="userName" id="userName" placeholder="Usuario">
@@ -16,7 +16,7 @@
               <span class="fas fa-key"></span>
               <input type="password" v-model="password" name="password" id="pwd" placeholder="Contraseña">
           </div>
-          <button class="btn mt-3">Conectar</button>
+          <button class="btn mt-3"  @click="$router.push('/listEst')">Conectar</button>
           <!-- @click="$router.push('/listEst')" para redireccionar a la otra pagina -->
       </form>       
   </div>
@@ -32,6 +32,9 @@ export default {
       nombreCompleto: '',
       password: '',
     }
+  },
+  methods(){
+    
   }
   
 }

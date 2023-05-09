@@ -39,11 +39,11 @@
                     <form>
                       <div class="mb-3 n">
                         <label for="exampleInputEmail1" class="form-label">Codigo</label>
-            <input type="number" class="form-control" id="codigoEstudiante" aria-describedby="emailHelp" placeholder="codigo">
+            <input type="number" class="form-control" v-model="numeroIdentificacion" id="codigoEstudiante" aria-describedby="emailHelp" placeholder="codigo">
                       </div>
                       <div class="mb-3 n">
                         <label for="exampleInputPassword1" class="form-label">Nombre Completo</label>
-            <input type="password" class="form-control" v-model="nombre_completo" id="exampleInputPassword1" placeholder="nombre">
+            <input type="password" class="form-control" v-model="nombreCompleto" id="exampleInputPassword1" placeholder="nombre">
                       </div>
                       <div class="mb-3 n">
                         <label for="exampleInputPassword1" class="form-label">Correo</label>
@@ -243,7 +243,8 @@
       return {
         showModal: false,
         posts: [],
-        nombre_completo: '',
+        nombreCompleto: '',
+        numeroIdentificacion: '',
       };
     },
     methods: {
