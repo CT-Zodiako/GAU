@@ -49,7 +49,7 @@
                     </div>
                     <div class="mb-3 n">
                       <label for="exampleInputPassword1" class="form-label">Nombre Completo</label>
-                      <input type="password" class="form-control" v-model="nombre_completo" id="exampleInputPassword1"
+                      <input type="password" class="form-control" id="exampleInputPassword1"
                         placeholder="nombre">
                     </div>
                     <div class="mb-3 n">
@@ -79,9 +79,9 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="post in posts" :key="post.idProfesor" :src="post.thumbnailURL" :alt="post.title">
+              <tr v-for="post in posts" :key="post.numeroIdentificacion" :src="post.thumbnailURL" :alt="post.title">
                 <td>
-                  {{ post.idEstudiante }}
+                  {{ post.nombreCompleto }}
                 </td>
                 <td>
                   {{ post.faltas }}
@@ -263,8 +263,9 @@ export default {
         await this.estudianteServicio.trearEstudiantes();
     },
   },
+
   created() {
-    this.trearEstudiantes()
+    this.consultarData()
   }
 }
 </script>

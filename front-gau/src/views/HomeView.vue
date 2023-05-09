@@ -384,6 +384,9 @@ export default {
       this.datosClases =
         await this.claseServicio.claseServicio();
     },
+  },
+  created() {
+    this.consultarData()
   }
 }
 </script>

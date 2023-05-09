@@ -6,9 +6,9 @@ export default class estudianteServicio {
   async trearEstudiantes() {
     try {
       const response = await axios.get(
-        api_endpoint + "estudiante",
+        api_endpoint + "estudiantes",
       );
-
+      
       return response.data.data;
     } catch (err) {
       console.error(err);
