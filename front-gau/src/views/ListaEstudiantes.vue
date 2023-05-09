@@ -243,7 +243,6 @@
       return {
         showModal: false,
         posts: [],
-        nombre_completo: '',
       };
     },
     methods: {
