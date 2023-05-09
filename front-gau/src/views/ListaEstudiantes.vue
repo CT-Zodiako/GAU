@@ -249,7 +249,7 @@ button {
 
 import estudianteServicio from "../services/estudiantesServicio";
 export default {
-  name: 'LoginView',
+  name: 'ListaEstudiantes',
   data() {
     return {
       showModal: false,
@@ -264,7 +264,7 @@ export default {
     },
   },
   created() {
-    this.getPosts()
+    this.trearEstudiantes()
   }
 }
 </script>

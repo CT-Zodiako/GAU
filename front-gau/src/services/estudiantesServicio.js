@@ -9,7 +9,7 @@ export default class estudianteServicio {
         api_endpoint + "estudiante",
       );
 
-      return response.data;
+      return response.data.data;
     } catch (err) {
       console.error(err);
       // AuthControl.verificarStatusCode(err);
