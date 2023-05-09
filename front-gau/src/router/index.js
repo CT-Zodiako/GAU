@@ -8,8 +8,13 @@ const routes = [
     component: Login
   },
   {
+    path: '/home',
+    name: 'clases',
+    component: () => import('../views/HomeView.vue')
+  },
+  {
     path: '/listEst',
-    name: 'estudiante',
+    name: 'estudiantes',
     component: () => import('../views/ListaEstudiantes.vue')
   },
   {

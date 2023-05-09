@@ -61,7 +61,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn" data-bs-dismiss="modal" @click="showModal = false">Close</button>
-                  <button type="submit" class="btn" @click="$router.push('/about')">Submit</button>
+                  <button type="submit" class="btn" @click="$router.push('/home')">Submit</button>
                 </div>
               </div>
             </div>
@@ -81,10 +81,10 @@
             <tbody>
               <tr v-for="post in posts" :key="post.numeroIdentificacion" :src="post.thumbnailURL" :alt="post.title">
                 <td>
-                  {{ post.nombreCompleto }}
+                  {{ post.numeroIdentificacion }}
                 </td>
                 <td>
-                  {{ post.faltas }}
+                  {{ post.nombreCompleto }}
                 </td>
                 <td>
                   <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
