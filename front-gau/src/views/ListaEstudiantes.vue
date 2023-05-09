@@ -61,7 +61,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn" data-bs-dismiss="modal" @click="showModal = false">Close</button>
-                  <button type="submit" class="btn" @click="$router.push('/home')">Submit</button>
+                  <button type="submit" class="btn" @click="$router.push('')">Submit</button>
                 </div>
               </div>
             </div>

@@ -4,7 +4,7 @@ const { traerClases, traerClase, actualizarClase, crearClase, eliminarClase } = 
 const autentificacionMiddleware = require('../middleware/sesion')
 const router = express.Router()
 
-router.get("/", autentificacionMiddleware, traerClases)
+router.get("/", traerClases)
 
 router.get("/:id", validacionTraerClase, traerClase)
 

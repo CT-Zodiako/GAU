@@ -16,7 +16,7 @@
               <span class="fas fa-key"></span>
               <input type="password" name="password" id="pwd" placeholder="Contraseña">
           </div>
-          <button class="btn mt-3" @click="$router.push('/listEst')">Conectar</button>
+          <button class="btn mt-3" @click="$router.push('/home')">Conectar</button>
           <!-- @click="$router.push('/listEst') para redireccionar a la otra pagina -->
       </form>       
   </div>
