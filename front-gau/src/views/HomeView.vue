@@ -45,20 +45,19 @@
                 <div class="modal-body">
                   <form>
                     <div class="mb-3 n">
-                      <label for="exampleInputEmail1" class="form-label">Id</label>
-                      <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                        placeholder="id">
+                      <label for="exampleInputEmail1" class="form-label">Id Profesor</label>
+                      <input type="text" class="form-control" v-model="idProfesor" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="id">
                     </div>
                     <div class="mb-3 n">
                       <label for="exampleInputPassword1" class="form-label">Materia</label>
-                      <input type="Nombre" class="form-control" id="exampleInputPassword1" placeholder="materia">
+                      <input type="text" class="form-control" v-model="nombreClase" id="exampleInputPassword1" placeholder="materia">
                     </div>
                   </form>
                 </div>
                 <!-- FOOTER DEL MODAL -->
                 <div class="modal-footer">
                   <button type="button" class="btn" data-bs-dismiss="modal" @click="showModal = false">Close</button>
-                  <button type="submit" class="btn">Submit</button>
+                  <button type="submit" class="btn"  @click="launchAction">Submit</button>
                 </div>
               </div>
             </div>
@@ -267,7 +266,9 @@ export default {
   data() {
     return {
       showModal: false,
-      datosClases: []
+      datosClases: [],
+      nombreClase: null,
+      idProfesor: null
     };
   },
   methods: {
@@ -276,6 +277,11 @@ export default {
       this.datosClases =
         await this.claseServicio.trearMaterias();
     },
+
+    launchAction: async function () {
+        this.claseServicio = new claseServicio();
+        await this.claseServicio.agregarMaterias(this.nombreClase, this.idProfesor);
+    }
   },
 
   created() {

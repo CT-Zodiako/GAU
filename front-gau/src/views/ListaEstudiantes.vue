@@ -44,13 +44,12 @@
                   <form>
                     <div class="mb-3 n">
                       <label for="exampleInputEmail1" class="form-label">Codigo</label>
-                      <input type="number" class="form-control" v-modal="numeroIdentificacion" id="codigoEstudiante" aria-describedby="emailHelp"
+                      <input type="number" class="form-control" v-model="numeroIdentificacion" id="codigoEstudiante" aria-describedby="emailHelp"
                         placeholder="codigo">
                     </div>
                     <div class="mb-3 n">
                       <label for="exampleInputPassword1" class="form-label">Nombre Completo</label>
-                      <input type="text" class="form-control" v-modal="nombreCompleto" id="exampleInputPassword1"
-                        placeholder="nombre">
+                      <input type="text" class="form-control" v-model="nombreCompleto" id="nombreEstudiante" placeholder="nombre">
                     </div>
                   </form>
                 </div>
@@ -76,14 +75,13 @@
             <tbody>
               <tr v-for="post in posts" :key="post.numeroIdentificacion" :src="post.thumbnailURL" :alt="post.title">
                 <td>
-                  {{ post.numeroIdentificacion }}
+                  {{ post.nombreCompleto  }}
                 </td>
                 <td>
                   {{ post.nombreCompleto }}
                 </td>
-                <td>
-                  <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                    placeholder="">
+                <td class="opciones">
+                  <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" style="width: 60px; height: 35px;">
                 </td>
                 <td>
                   <button type="submit" class="btn btn btn-success">Submit</button>
@@ -180,6 +178,12 @@
   text-align: center;
 }
 
+tr .opciones {
+  padding-bottom: 15px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 
 /* INICIA LOS ESTILOS PARA EL MODAL  */
 .modal {
@@ -252,7 +256,6 @@ export default {
       nombreCompleto: null,
       numeroIdentificacion: null,
       estNuevo: true,
-
     };
   },
   methods: {
@@ -263,8 +266,8 @@ export default {
     },
 
     launchAction: async function () {
-        this.estudianteServicio = new estudianteGuardar();
-        await this.estudianteGuardar.agregarEstudiantes(this.nombreCompleto, this.numeroIdentificacion);
+        this.estudianteServicio = new estudianteServicio();
+        await this.estudianteServicio.agregarEstudiantes(this.nombreCompleto, this.numeroIdentificacion);
     }
   },
 

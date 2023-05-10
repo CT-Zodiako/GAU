@@ -20,11 +20,12 @@ export default class estudianteServicio {
     try {
       const response = await axios.post(
         api_endpoint + "estudiantes",{
-          nombreCompleto: this.nombreCompleto, 
-          numeroIdentificacion: this.numeroIdentificacion
+          nombreCompleto: nombreCompleto, 
+          numeroIdentificacion: numeroIdentificacion
         }
-      );
-      
+        
+        );
+        console.log(response);
       return response;
     } catch (err) {
       console.error(err);

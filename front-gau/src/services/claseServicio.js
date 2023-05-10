@@ -15,6 +15,22 @@ export default class claseServicio {
       // AuthControl.verificarStatusCode(err);
     }
   }
+
+  async agregarMaterias(nombreClase, idProfesor) {
+    try {
+      const response = await axios.post(
+        api_endpoint + "clases",{
+          nombreClase: nombreClase, 
+          idProfesor: idProfesor
+        }
+      );
+      
+      return response;
+    } catch (err) {
+      console.error(err);
+      // AuthControl.verificarStatusCode(err);
+    }
+  }
 }
 
 
