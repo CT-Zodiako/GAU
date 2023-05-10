@@ -56,4 +56,5 @@ const eliminarClase = async (req, res) => {
     }
 }
 
+
 module.exports = { traerClase, traerClases, crearClase, actualizarClase, eliminarClase }

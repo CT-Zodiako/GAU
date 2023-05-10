@@ -15,7 +15,25 @@ export default class estudianteServicio {
       // AuthControl.verificarStatusCode(err);
     }
   }
+
+  async agregarEstudiantes(nombreCompleto, numeroIdentificacion) {
+    try {
+      const response = await axios.post(
+        api_endpoint + "estudiantes",{
+          nombreCompleto: this.nombreCompleto, 
+          numeroIdentificacion: this.numeroIdentificacion
+        }
+      );
+      
+      return response;
+    } catch (err) {
+      console.error(err);
+      // AuthControl.verificarStatusCode(err);
+    }
+  }
+
 }
+
 
 
 

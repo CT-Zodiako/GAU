@@ -44,24 +44,19 @@
                   <form>
                     <div class="mb-3 n">
                       <label for="exampleInputEmail1" class="form-label">Codigo</label>
-                      <input type="number" class="form-control" id="codigoEstudiante" aria-describedby="emailHelp"
+                      <input type="number" class="form-control" v-modal="numeroIdentificacion" id="codigoEstudiante" aria-describedby="emailHelp"
                         placeholder="codigo">
                     </div>
                     <div class="mb-3 n">
                       <label for="exampleInputPassword1" class="form-label">Nombre Completo</label>
-                      <input type="password" class="form-control" id="exampleInputPassword1"
+                      <input type="text" class="form-control" v-modal="nombreCompleto" id="exampleInputPassword1"
                         placeholder="nombre">
-                    </div>
-                    <div class="mb-3 n">
-                      <label for="exampleInputPassword1" class="form-label">Correo</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                        placeholder="e-mail">
                     </div>
                   </form>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn" data-bs-dismiss="modal" @click="showModal = false">Close</button>
-                  <button type="submit" class="btn" @click="$router.push('')">Submit</button>
+                  <button type="submit" class="btn" @click="launchAction">Submit</button>
                 </div>
               </div>
             </div>
@@ -254,6 +249,10 @@ export default {
     return {
       showModal: false,
       posts: [],
+      nombreCompleto: null,
+      numeroIdentificacion: null,
+      estNuevo: true,
+
     };
   },
   methods: {
@@ -262,6 +261,11 @@ export default {
       this.posts =
         await this.estudianteServicio.trearEstudiantes();
     },
+
+    launchAction: async function () {
+        this.estudianteServicio = new estudianteGuardar();
+        await this.estudianteGuardar.agregarEstudiantes(this.nombreCompleto, this.numeroIdentificacion);
+    }
   },
 
   created() {
