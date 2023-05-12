@@ -30,15 +30,14 @@
     <div class="body">
       <div class="list-view-estudiante" style="width: 1000px;">
         <div class="new-estudiante">
-          <button type="button" class="btn btn-warning" @click="showModal = true">Nuevo estudiante</button>
-          <!-- MODAL DE ESTUDIANTES -->
-          <div class="modal" tabindex="-1" v-if="showModal">
+          <button type="button" class="btn btn-warning" @click="agregar = true">Nuevo estudiante</button>
+          <div class="modal" tabindex="-1" v-if="agregar">
             <div class="modal-dialog">
               <div class="modal-content" style="background: #efc729;">
                 <div class="modal-header">
                   <h5 class="modal-title" style="font-size: 28px;">Datos del Estudiante</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                    @click="showModal = false"></button>
+                    @click="agregar = false"></button>
                 </div>
                 <div class="modal-body">
                   <form>
@@ -54,7 +53,36 @@
                   </form>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn" data-bs-dismiss="modal" @click="showModal = false">Close</button>
+                  <button type="button" class="btn" data-bs-dismiss="modal" @click="agregar = false">Close</button>
+                  <button type="submit" class="btn" @click="launchAction">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal" tabindex="-1" v-if="editar">
+            <div class="modal-dialog">
+              <div class="modal-content" style="background: #efc729;">
+                <div class="modal-header">
+                  <h5 class="modal-title" style="font-size: 28px;">Editar Datos del Estudiante</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    @click="editar = false"></button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="mb-3 n">
+                      <label for="exampleInputEmail1" class="form-label">Codigo</label>
+                      <input type="number" class="form-control" v-model="numeroIdentificacion" id="codigoEstudiante" aria-describedby="emailHelp"
+                        placeholder="codigo">
+                    </div>
+                    <div class="mb-3 n">
+                      <label for="exampleInputPassword1" class="form-label">Nombre Completo</label>
+                      <input type="text" class="form-control" v-model="nombreCompleto" id="nombreEstudiante" placeholder="nombre">
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn" data-bs-dismiss="modal" @click="editar = false">Close</button>
                   <button type="submit" class="btn" @click="launchAction">Submit</button>
                 </div>
               </div>
@@ -65,26 +93,48 @@
         <div class="container">
           <table class="table">
             <thead>
-              <tr class="info" style="background-color: #efc729;">
+              <tr class="info">
                 <th scope="col">Text</th>
                 <th class="date" scope="col">Numero Faltas</th>
                 <th class="date" scope="col">Agrega Falta</th>
+                <th class="date" scope="col">Estado</th>
                 <th class="date" scope="col">Opcion</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="post in posts" :key="post.numeroIdentificacion" :src="post.thumbnailURL" :alt="post.title">
-                <td>
-                  {{ post.nombreCompleto  }}
-                </td>
+              <tr v-for="post in posts" :key="post._id" :src="post.thumbnailURL" :alt="post.title">
                 <td>
                   {{ post.nombreCompleto }}
                 </td>
-                <td class="opciones">
-                  <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" style="width: 60px; height: 35px;">
+                <td>
+                  <div>
+                    {{ post.nombreCompleto }}
+                  </div>
                 </td>
                 <td>
-                  <button type="submit" class="btn btn btn-success">Submit</button>
+                  <div>
+                    <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" style="width: 60px; height: 35px;">
+                  </div>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-warning">Warning</button>
+                </td>
+                <td class="opciones">
+                  <div>
+                    <button type="button" class="btn btn-warning" @click="editar = true">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                      </svg>
+                    </button>
+                  </div>
+                  <div>
+                    <button type="button" class="btn btn-danger" @click="deletePost(post._id)">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                        <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                      </svg>
+                    </button>
+                  </div>
                 </td>
               </tr>
             </tbody>
@@ -179,11 +229,11 @@
 }
 
 tr .opciones {
-  padding-bottom: 15px;
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
+
 
 /* INICIA LOS ESTILOS PARA EL MODAL  */
 .modal {
@@ -251,7 +301,8 @@ export default {
   name: 'ListaEstudiantes',
   data() {
     return {
-      showModal: false,
+      agregar: false,
+      editar: false,
       posts: [],
       nombreCompleto: null,
       numeroIdentificacion: null,
@@ -268,6 +319,11 @@ export default {
     launchAction: async function () {
         this.estudianteServicio = new estudianteServicio();
         await this.estudianteServicio.agregarEstudiantes(this.nombreCompleto, this.numeroIdentificacion);
+    },
+
+    deletePost: async function () {
+        this.estudianteServicio = new estudianteServicio();
+        await this.estudianteServicio.eliminarEstudiantes(this._id);
     }
   },
 

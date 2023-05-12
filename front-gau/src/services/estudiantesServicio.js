@@ -23,10 +23,20 @@ export default class estudianteServicio {
           nombreCompleto: nombreCompleto, 
           numeroIdentificacion: numeroIdentificacion
         }
-        
-        );
-        console.log(response);
+      );
       return response;
+    } catch (err) {
+      console.error(err);
+      // AuthControl.verificarStatusCode(err);
+    }
+  }
+
+  async eliminarEstudiantes(_id) {
+    try {
+      await axios.delete(
+        api_endpoint + `estudiantes/${_id}`,
+        );
+      return this.getEstudiantes();
     } catch (err) {
       console.error(err);
       // AuthControl.verificarStatusCode(err);
