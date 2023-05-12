@@ -31,7 +31,7 @@ export default class estudianteServicio {
     }
   }
 
-  async editarEstudiantes( nombreCompleto, numeroIdentificacion) {
+  async editarEstudiantes( _id, nombreCompleto, numeroIdentificacion) {
     try {
       const response = await axios.put(
         api_endpoint + "estudiantes",{
@@ -47,12 +47,13 @@ export default class estudianteServicio {
     }
   }
 
-  async eliminarEstudiantes(_id) {
+  async eliminarEstudiantes(idEstudiante) {
     try {
       await axios.delete(
-        api_endpoint + "estudiantes"+_id,
-        );
-      return this.getEstudiantes();
+        api_endpoint + `estudiantes/${idEstudiante}`,
+      );
+      
+      return this.getEstudiantes;
     } catch (err) {
       console.error(err);
       // AuthControl.verificarStatusCode(err);
