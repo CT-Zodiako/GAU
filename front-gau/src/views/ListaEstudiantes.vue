@@ -54,7 +54,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn" data-bs-dismiss="modal" @click="agregar = false">Close</button>
-                  <button type="submit" class="btn" @click="launchAction">Submit</button>
+                  <button type="submit" class="btn" @click="guardarEstudiante">Submit</button>
                 </div>
               </div>
             </div>
@@ -83,7 +83,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn" data-bs-dismiss="modal" @click="editar = false">Close</button>
-                  <button type="submit" class="btn" @click="launchAction">Submit</button>
+                  <button type="submit" class="btn" @click="actualizarEstudiante">Submit</button>
                 </div>
               </div>
             </div>
@@ -316,9 +316,14 @@ export default {
         await this.estudianteServicio.trearEstudiantes();
     },
 
-    launchAction: async function () {
+    guardarEstudiante: async function () {
         this.estudianteServicio = new estudianteServicio();
         await this.estudianteServicio.agregarEstudiantes(this.nombreCompleto, this.numeroIdentificacion);
+    },
+
+    actualizarEstudiante: async function () {
+        this.estudianteServicio = new estudianteServicio();
+        await this.estudianteServicio.editarEstudiantes(this._id, this.nombreCompleto, this.numeroIdentificacion);
     },
 
     deletePost: async function () {

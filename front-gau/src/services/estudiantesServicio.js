@@ -31,10 +31,26 @@ export default class estudianteServicio {
     }
   }
 
+  async editarEstudiantes( nombreCompleto, numeroIdentificacion) {
+    try {
+      const response = await axios.put(
+        api_endpoint + "estudiantes",{
+          nombreCompleto: nombreCompleto, 
+          numeroIdentificacion: numeroIdentificacion
+        }
+      );
+      
+      return response;
+    } catch (err) {
+      console.error(err);
+      // AuthControl.verificarStatusCode(err);
+    }
+  }
+
   async eliminarEstudiantes(_id) {
     try {
       await axios.delete(
-        api_endpoint + `estudiantes/${_id}`,
+        api_endpoint + "estudiantes"+_id,
         );
       return this.getEstudiantes();
     } catch (err) {
