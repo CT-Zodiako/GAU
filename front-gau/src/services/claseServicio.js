@@ -31,6 +31,35 @@ export default class claseServicio {
       // AuthControl.verificarStatusCode(err);
     }
   }
+
+  async editarClases( _id, nombreCompleto, numeroIdentificacion) {
+    try {
+      const response = await axios.put(
+        api_endpoint + "estudiantes",{
+          nombreCompleto: nombreCompleto, 
+          numeroIdentificacion: numeroIdentificacion
+        }
+      );
+      
+      return response;
+    } catch (err) {
+      console.error(err);
+      // AuthControl.verificarStatusCode(err);
+    }
+  }
+
+  async eliminarClases(idClases) {
+    try {
+      await axios.delete(
+        api_endpoint + `clases/${idClases}`,
+      );
+      
+      return this.getClases;
+    } catch (err) {
+      console.error(err);
+      // AuthControl.verificarStatusCode(err);
+    }
+  }
 }
 
 
