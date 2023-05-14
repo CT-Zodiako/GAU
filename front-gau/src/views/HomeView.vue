@@ -52,8 +52,8 @@
                   </form>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn" data-bs-dismiss="modal" @click="agregarClase = false">Close</button>
-                  <button type="submit" class="btn"  @click="guardarClase">Submit</button>
+                  <button type="button" class="btn" data-bs-dismiss="modal" @click="agregarClase = false" style="background-color: rgba(255, 0, 0, 0.7);">Cerrar</button>
+                  <button type="submit" class="btn"  @click="guardarClase" style="background-color: green;">Guardar</button>
                 </div>
               </div>
             </div>
@@ -84,8 +84,8 @@
                   </form>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn" data-bs-dismiss="modal" @click="editarClase = false">Close</button>
-                  <button type="submit" class="btn"  @click="actualizarClase, editarClase = false">Submit</button>
+                  <button type="button" class="btn" data-bs-dismiss="modal" @click="editarClase = false" style="background-color: rgba(255, 0, 0, 0.7);">Cerrar</button>
+                  <button type="submit" class="btn"  @click="actualizarClase, editarClase = false" style="background-color: green;">Editar</button>
                 </div>
               </div>
             </div>

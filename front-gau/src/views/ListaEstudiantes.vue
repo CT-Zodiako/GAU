@@ -53,8 +53,8 @@
                   </form>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn" data-bs-dismiss="modal" @click="agregarEstudiante = false">Close</button>
-                  <button type="submit" class="btn" @click="guardarEstudiante">Submit</button>
+                  <button type="button" class="btn" data-bs-dismiss="modal" @click="agregarEstudiante = false" style="background-color: rgba(255, 0, 0, 0.7);">Cerrar</button>
+                  <button type="submit" class="btn" @click="guardarEstudiante" style="background-color: green;">Guardar</button>
                 </div>
               </div>
             </div>
@@ -79,11 +79,16 @@
                       <label for="exampleInputPassword1" class="form-label">Nombre Completo</label>
                       <input type="text" class="form-control" v-model="nombreCompleto" id="nombreEstudiante" placeholder="nombre">
                     </div>
+                    <div class="mb-3 n">
+                      <label for="exampleInputEmail1" class="form-label">Codigo</label>
+                      <input type="number" class="form-control" v-model="faltas" id="codigoEstudiante" aria-describedby="emailHelp"
+                        placeholder="codigo">
+                    </div>
                   </form>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn" data-bs-dismiss="modal" @click="editarEstudiante = false">Close</button>
-                  <button type="submit" class="btn" @click="actualizarEstudiante">Submit</button>
+                  <button type="button" class="btn" data-bs-dismiss="modal" @click="editarEstudiante = false" style="background-color: rgba(255, 0, 0, 0.7);">Cerrar</button>
+                  <button type="submit" class="btn" @click="actualizarEstudiante" style="background-color: green;">Editar</button>
                 </div>
               </div>
             </div>
@@ -93,7 +98,7 @@
           <table class="table">
             <thead>
               <tr class="info">
-                <th scope="col">Text</th>
+                <th scope="col">Nombre</th>
                 <th class="date" scope="col">Numero Faltas</th>
                 <th class="date" scope="col">Agrega Falta</th>
                 <th class="date" scope="col">Estado</th>
@@ -103,20 +108,20 @@
             <tbody>
               <tr v-for="post in posts" :key="post._id" :src="post.thumbnailURL" :alt="post.title">
                 <td>
-                  {{ post._id }}
+                  {{ post.nombreCompleto }}
                 </td>
                 <td>
                   <div>
-                    {{ post.nombreCompleto }}
+                    {{ post.faltas }}
                   </div>
                 </td>
-                <td>
+                <td style="display: flex; justify-content: center;">
                   <div>
                     <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" style="width: 60px; height: 35px;">
                   </div>
                 </td>
                 <td>
-                  <button type="button" class="btn btn-warning">Warning</button>
+                  <button type="button" class="btn btn-warning">Riesgo</button>
                 </td>
                 <td class="opciones">
                   <div>
@@ -317,12 +322,12 @@ export default {
 
     guardarEstudiante: async function () {
         this.estudianteServicio = new estudianteServicio();
-        await this.estudianteServicio.agregarEstudiantes(this.nombreCompleto, this.numeroIdentificacion);
+        await this.estudianteServicio.agregarEstudiantes(this.faltas, this.nombreCompleto);
     },
 
     actualizarEstudiante: async function () {
         this.estudianteServicio = new estudianteServicio();
-        await this.estudianteServicio.editarEstudiantes(this._id, this.nombreCompleto, this.numeroIdentificacion);
+        await this.estudianteServicio.editarEstudiantes(this._id, this.faltas, this.nombreCompleto);
     },
 
     deletePost: async function (idEstudiante) {
