@@ -32,16 +32,16 @@ export default class claseServicio {
     }
   }
 
-  async editarClases( _id, nombreCompleto, numeroIdentificacion) {
+  async editarClases( id, idProfesor, nombreClase) {
     try {
       const response = await axios.put(
-        api_endpoint + "estudiantes",{
-          nombreCompleto: nombreCompleto, 
-          numeroIdentificacion: numeroIdentificacion
+        api_endpoint + `clases/${id}`,{
+          idProfesor: idProfesor, 
+          nombreClase: nombreClase
         }
       );
       
-      return response;
+      return response.data.data;
     } catch (err) {
       console.error(err);
       // AuthControl.verificarStatusCode(err);
