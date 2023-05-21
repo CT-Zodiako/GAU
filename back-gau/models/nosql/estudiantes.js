@@ -13,7 +13,7 @@ const estudianteSchema = new mongoose.Schema({
   },
   faltas: {
     type: Number,
-    default: "0"
+    default: 0
   }
 },
   {

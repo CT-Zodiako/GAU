@@ -31,6 +31,7 @@
       <div class="list-view-estudiante" style="width: 1000px;">
         <div class="new-estudiante">
           <button type="button" class="btn btn-warning" @click="agregarEstudiante = true">Nuevo estudiante</button>
+          
           <div class="modal" tabindex="-1" v-if="agregarEstudiante">
             <div class="modal-dialog">
               <div class="modal-content" style="background: #efc729;">
@@ -43,8 +44,11 @@
                   <form>
                     <div class="mb-3 n">
                       <label for="exampleInputEmail1" class="form-label">Codigo</label>
-                      <input type="number" class="form-control" v-model="numeroIdentificacion" id="codigoEstudiante" aria-describedby="emailHelp"
+                      <input type="text" class="form-control" v-model="numeroIdentificacion" id="codigoEstudiante" aria-describedby="emailHelp"
                         placeholder="codigo">
+                    </div>
+                    <div>
+                      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="falta" style="width: 60px; height: 35px;">
                     </div>
                     <div class="mb-3 n">
                       <label for="exampleInputPassword1" class="form-label">Nombre Completo</label>
@@ -71,18 +75,17 @@
                 <div class="modal-body">
                   <form>
                     <div class="mb-3 n">
+                      <label for="exampleInputPassword1" class="form-label">Id Estudiante</label>
+                      <input type="text" class="form-control" v-model="id" id="nombreEstudiante" placeholder="nombre">
+                    </div>
+                    <div class="mb-3 n">
                       <label for="exampleInputEmail1" class="form-label">Codigo</label>
-                      <input type="number" class="form-control" v-model="numeroIdentificacion" id="codigoEstudiante" aria-describedby="emailHelp"
+                      <input type="text" class="form-control" v-model="numeroIdentificacion" id="codigoEstudiante" aria-describedby="emailHelp"
                         placeholder="codigo">
                     </div>
                     <div class="mb-3 n">
                       <label for="exampleInputPassword1" class="form-label">Nombre Completo</label>
                       <input type="text" class="form-control" v-model="nombreCompleto" id="nombreEstudiante" placeholder="nombre">
-                    </div>
-                    <div class="mb-3 n">
-                      <label for="exampleInputEmail1" class="form-label">Codigo</label>
-                      <input type="number" class="form-control" v-model="faltas" id="codigoEstudiante" aria-describedby="emailHelp"
-                        placeholder="codigo">
                     </div>
                   </form>
                 </div>
@@ -115,13 +118,12 @@
                     {{ post.faltas }}
                   </div>
                 </td>
-                <td style="display: flex; justify-content: center;">
-                  <div>
-                    <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" style="width: 60px; height: 35px;">
-                  </div>
+                <td style="display: flex; justify-content: space-around; align-items: center;">
+                  <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="faltas" style="width: 60px; height: 35px;" @keyup.enter="guardarFalta=(post._id)">
+                  <button type="button" class="btn btn-warning" @click="guardarFalta=(post._id)" style="margin-right: 15px;">G</button>
                 </td>
                 <td>
-                  <button type="button" class="btn btn-warning">Riesgo</button>
+                  <div type="button" :class="colorEstado(post.faltas)">{{mensaje}}</div>
                 </td>
                 <td class="opciones">
                   <div>
@@ -149,7 +151,7 @@
   </div>
 </template>
   
-<style>
+<style scoped>
 .header {
   background-color: red;
   margin: 0 auto;
@@ -238,6 +240,29 @@ tr .opciones {
   align-items: center;
 }
 
+.verde {
+  background-color: rgb(0, 165, 0);
+  color: rgb(255, 255, 255);
+  text-align: center;
+  height: 35px;
+  border-radius: 1vh;
+}
+
+.amarillo {
+  background-color: rgb(240, 224, 6);
+  color: rgb(255, 255, 255);
+  text-align: center;
+  height: 35px;
+  border-radius: 1vh;
+}
+
+.rojo {
+  background-color: rgb(221, 23, 23);
+  color: rgb(255, 255, 255);
+  text-align: center;
+  height: 35px;
+  border-radius: 1vh;
+}
 
 /* INICIA LOS ESTILOS PARA EL MODAL  */
 .modal {
@@ -310,29 +335,49 @@ export default {
       posts: [],
       nombreCompleto: null,
       numeroIdentificacion: null,
-      estNuevo: true,
+      id: null,
+      faltas: null,
+      mensaje: '',
     };
   },
+
   methods: {
     consultarData: async function () {
       this.estudianteServicio = new estudianteServicio();
-      this.posts =
-        await this.estudianteServicio.trearEstudiantes();
+      this.posts = await this.estudianteServicio.trearEstudiantes();
     },
 
     guardarEstudiante: async function () {
         this.estudianteServicio = new estudianteServicio();
-        await this.estudianteServicio.agregarEstudiantes(this.faltas, this.nombreCompleto);
+        await this.estudianteServicio.agregarEstudiantes(this.nombreCompleto, this.numeroIdentificacion, this.falta);
+    },
+
+    guardarFalta: async function (idFalta) {
+        this.estudianteServicio = new estudianteServicio();
+        await this.estudianteServicio.agregarFalta(idFalta, this.faltas);
     },
 
     actualizarEstudiante: async function () {
         this.estudianteServicio = new estudianteServicio();
-        await this.estudianteServicio.editarEstudiantes(this._id, this.faltas, this.nombreCompleto);
+        await this.estudianteServicio.editarEstudiantes(this.id, this.nombreCompleto, this.numeroIdentificacion);
     },
 
     deletePost: async function (idEstudiante) {
         this.estudianteServicio = new estudianteServicio();
         await this.estudianteServicio.eliminarEstudiantes(idEstudiante);
+    },
+
+    colorEstado(falta){
+      if (falta < "5"){
+        this.mensaje = 'Bien';
+        return 'verde';
+      } else if (falta >= "5" && falta <= "9"){
+        this.mensaje = 'Riesgo';
+        return 'amarillo';
+      } else {
+        this.mensaje = 'Perdió';
+        return 'rojo';
+      }
     },
   },
 

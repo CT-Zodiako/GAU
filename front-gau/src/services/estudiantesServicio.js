@@ -16,11 +16,12 @@ export default class estudianteServicio {
     }
   }
 
-  async agregarEstudiantes(nombreCompleto, numeroIdentificacion) {
+  async agregarEstudiantes(nombreCompleto, numeroIdentificacion, falta) {
     try {
       const response = await axios.post(
         api_endpoint + "estudiantes",{
           nombreCompleto: nombreCompleto, 
+          faltas: falta,
           numeroIdentificacion: numeroIdentificacion
         }
       );
@@ -31,16 +32,31 @@ export default class estudianteServicio {
     }
   }
 
-  async editarEstudiantes( _id, nombreCompleto, numeroIdentificacion) {
+  async agregarFalta(idFalta, faltas) {
+    try { 
+      const response = await axios.put(
+        api_endpoint + `estudiantes/${idFalta}`,{
+          faltas: faltas
+        }
+      );
+      return response;
+    } catch (err) {
+      console.error(err);
+      // AuthControl.verificarStatusCode(err);
+    }
+  }
+
+
+  async editarEstudiantes(id, nombreCompleto, numeroIdentificacion) {
     try {
       const response = await axios.put(
-        api_endpoint + "estudiantes",{
+        api_endpoint + `estudiantes/${id}`,{
           nombreCompleto: nombreCompleto, 
           numeroIdentificacion: numeroIdentificacion
         }
       );
       
-      return response;
+      return response.data.data;
     } catch (err) {
       console.error(err);
       // AuthControl.verificarStatusCode(err);
@@ -60,6 +76,18 @@ export default class estudianteServicio {
     }
   }
 
+  async cambiarEstado() {
+    try {
+      const response = await axios.get(
+        api_endpoint + "estudiantes/faltas",
+      );
+  
+      return response.data.data;
+    } catch (err) {
+      console.error(err);
+      // AuthControl.verificarStatusCode(err);
+    }
+  }
 }
 
 

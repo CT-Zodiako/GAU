@@ -85,7 +85,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn" data-bs-dismiss="modal" @click="editarClase = false" style="background-color: rgba(255, 0, 0, 0.7);">Cerrar</button>
-                  <button type="submit" class="btn"  @click="actualizarClase, editarClase = false" style="background-color: green;">Editar</button>
+                  <button type="submit" class="btn"  @click="actualizarClase" style="background-color: green;">Editar</button>
                 </div>
               </div>
             </div>
