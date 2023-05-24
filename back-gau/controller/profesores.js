@@ -28,6 +28,7 @@ const crearProfesor = async (req, res) => {
         const data = await profesoresModel.create(body)
         res.send({ data })
     } catch (error) {
+        console.log(error);
         handleHttpError(res, 'Error en crearProfesores')
     }
 }

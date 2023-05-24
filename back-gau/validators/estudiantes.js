@@ -8,6 +8,8 @@ const validacionCrearEstudiante = [
     check("numeroIdentificacion")
         .exists()
         .notEmpty(),
+    check("faltas")
+        .exists(),
     (req, res, next) => {
         return validacionResultados(req, res, next)
     }

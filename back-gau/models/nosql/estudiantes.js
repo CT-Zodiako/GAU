@@ -11,6 +11,10 @@ const estudianteSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
+  faltas: {
+    type: Number,
+    default: 0
+  }
 },
   {
     timestamps: true,

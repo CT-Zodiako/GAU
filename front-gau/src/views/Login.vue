@@ -10,27 +10,23 @@
       <form class="p-3 mt-3">
           <div class="form-field d-flex align-items-center">
               <span class="far fa-user"></span>
-              <input type="text" v-model="nombreCompleto" name="userName" id="userName" placeholder="Usuario">
+              <input type="text" name="userName" id="userName" placeholder="Usuario">
           </div>
           <div class="form-field d-flex align-items-center">
               <span class="fas fa-key"></span>
-              <input type="password" v-model="password" name="password" id="pwd" placeholder="Contraseña">
+              <input type="password" name="password" id="pwd" placeholder="Contraseña">
           </div>
-          <button class="btn mt-3">Conectar</button>
+          <button class="btn mt-3" @click="$router.push('/home')">Conectar</button>
           <!-- @click="$router.push('/listEst') para redireccionar a la otra pagina -->
       </form>       
   </div>
 </template>
 
 <script>
-
-
 export default {
   name: 'HomeView',
   data(){
     return{
-      nombreCompleto: '',
-      password: '',
     }
   }
   
