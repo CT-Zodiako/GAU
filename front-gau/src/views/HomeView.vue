@@ -53,7 +53,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn" data-bs-dismiss="modal" @click="agregarClase = false" style="background-color: rgba(255, 0, 0, 0.7);">Cerrar</button>
-                  <button type="submit" class="btn"  @click="guardarClase" style="background-color: green;">Guardar</button>
+                  <button type="submit" class="btn" @click="guardarClase" style="background-color: green;">Guardar</button>
                 </div>
               </div>
             </div>

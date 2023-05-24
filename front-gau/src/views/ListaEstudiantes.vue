@@ -47,8 +47,9 @@
                       <input type="text" class="form-control" v-model="numeroIdentificacion" id="codigoEstudiante" aria-describedby="emailHelp"
                         placeholder="codigo">
                     </div>
-                    <div>
-                      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="falta" style="width: 60px; height: 35px;">
+                    <div class="mb-3 n">
+                      <label for="exampleInputPassword1" class="form-label">falta</label>
+                      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="falta">
                     </div>
                     <div class="mb-3 n">
                       <label for="exampleInputPassword1" class="form-label">Nombre Completo</label>
@@ -110,20 +111,19 @@
             </thead>
             <tbody>
               <tr v-for="post in posts" :key="post._id" :src="post.thumbnailURL" :alt="post.title">
-                <td>
+                <td style="height: 50px;">
                   {{ post.nombreCompleto }}
                 </td>
-                <td>
+                <td style="height: 50px;">
                   <div>
                     {{ post.faltas }}
                   </div>
                 </td>
-                <td style="display: flex; justify-content: space-around; align-items: center;">
+                <td style="display: flex; justify-content: space-around; align-items: center; height: 80px;">
                   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="faltas" style="width: 60px; height: 35px;" @keyup.enter="guardarFalta=(post._id)">
-                  <button type="button" class="btn btn-warning" @click="guardarFalta=(post._id)" style="margin-right: 15px;">G</button>
                 </td>
-                <td>
-                  <div type="button" :class="colorEstado(post.faltas)">{{mensaje}}</div>
+                <td id="estado">
+                  <div type="button" :class="colorEstado(post.faltas)" style="text-align: center; margin-top: 15px; padding-top: 5px;"><p>{{mensaje}}</p></div>
                 </td>
                 <td class="opciones">
                   <div>
@@ -238,6 +238,7 @@ tr .opciones {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  height: 80px;
 }
 
 .verde {
@@ -369,13 +370,13 @@ export default {
 
     colorEstado(falta){
       if (falta < "5"){
-        this.mensaje = 'Bien';
+        this.mensaje = 'Normal';
         return 'verde';
       } else if (falta >= "5" && falta <= "9"){
         this.mensaje = 'Riesgo';
         return 'amarillo';
       } else {
-        this.mensaje = 'Perdió';
+        this.mensaje = 'Perdido';
         return 'rojo';
       }
     },
